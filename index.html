@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<!-- 宣告使用 HTML5。 -->
+<html lang="zh-Hant">
+<!-- lang="zh-Hant" 表示主要使用繁體中文。 -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="走進台中東協廣場（原第一廣場），認識歷史更名、東南亞美食與商店、交通位置，透過景點清單、表格、照片與 Google 地圖閱讀城市故事。">
+    <meta name="keywords" content="東協廣場,第一廣場,台中,東南亞,移工,新住民,台中火車站">
+    <meta name="author" content="D1582316">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph 提供分享摘要。正式上線後再補 canonical 與 og:url（使用真實公開網址）。 -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:title" content="東協廣場報導｜台中的小東南亞">
+    <meta property="og:description" content="認識東協廣場的歷史更名、東南亞美食與商店，搭配表格、照片及位置地圖。">
+    <meta property="og:image:alt" content="東協廣場封面示意圖">
+    <title>東協廣場報導｜HW06 CSS 樣式練習</title>
+    <style>
+        /* 1. 盒子尺寸與全頁文字 */
+        * { box-sizing: border-box; }
+
+        body {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 32px 24px;
+            font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
+            font-size: 17px;
+            line-height: 1.85;
+            color: #263d35;
+            background-color: #9fe7e2;
+        }
+
+        /* 2. 頁首（文字改為淺色，深色背景上才看得清楚） */
+        header {
+            padding: 34px 36px;
+            background-color: #0b231d;
+            color: #fffdf8;
+            border-top: 6px solid #c89d56;
+            border-radius: 6px;
+        }
+
+        h1 { margin: 0 0 16px; font-size: 2rem; line-height: 1.4; letter-spacing: 0.04em; }
+        header p { margin: 10px 0; }
+        small { font-size: 0.85em; font-style: normal; }
+
+        /* 3. 導覽與連結 */
+        nav {
+            margin: 24px 0;
+            padding: 20px 24px;
+            background-color: #0c9a95;
+            border: 1px solid #cbd5c4;
+            border-radius: 6px;
+        }
+        nav h2 { margin-top: 0; padding: 0; border: 0; font-size: 1.1rem; }
+        nav ul { margin: 0; padding: 0; list-style: none; }
+        nav li { display: inline-block; margin: 4px 6px 4px 0; }
+        nav a {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #fffdf8;
+            border: 1px solid #cbd5c4;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        a { color: #0b5e42; text-underline-offset: 4px; overflow-wrap: anywhere; }
+        a:hover { color: #8a5a1f; text-decoration: underline; }
+        a:focus-visible, summary:focus-visible { outline: 3px solid #995a07; outline-offset: 4px; }
+
+        /* 4. 章節與盒子模型 */
+        section, aside {
+            margin: 24px 0;
+            padding: 24px 28px;
+            background-color: #fffdf8;
+            border: 1px solid #d9dfd2;
+            border-radius: 6px;
+        }
+        h2 {
+            margin: 0 0 18px;
+            padding-left: 12px;
+            border-left: 4px solid #59eb80;
+            font-size: 1.4rem;
+            line-height: 1.5;
+        }
+        h3 { margin: 22px 0 10px; font-size: 1.1rem; }
+        p { margin: 12px 0; }
+        ul, ol { padding-left: 1.6em; }
+        li { margin: 8px 0; }
+        hr { margin: 26px 0; border: 0; border-top: 1px solid #5f8d41; }
+
+        /* 5. 表格 */
+        table { width: 100%; border-collapse: collapse; font-size: 0.95em; overflow-wrap: anywhere; }
+        caption { margin-bottom: 12px; text-align: left; font-weight: bold; }
+        th, td { padding: 12px; border: 1px solid #498d3c; text-align: left; vertical-align: top; }
+        thead { background-color: #cfe9c4; }
+        tbody th { background-color: #e4f1d8; }
+
+        /* 6. 圖片與地圖 */
+        figure { margin: 18px 0; }
+        img { display: block; max-width: 100%; height: auto; border-radius: 4px; }
+        figcaption { margin-top: 10px; color: #2f4a3e; font-size: 0.85em; }
+        iframe { display: block; max-width: 100%; border: 0; border-radius: 4px; }
+        .map-frame { width: 100%; height: 340px; }
+
+        /* 7. ID 選擇器：補充區 */
+        #tips { background-color: #e7f3c9; border-left: 5px solid #8aa64a; }
+        summary { cursor: pointer; font-weight: bold; }
+
+        footer {
+            margin-top: 32px;
+            padding: 20px 0;
+            border-top: 2px solid #617165;
+            color: #2f4a3e;
+            text-align: center;
+        }
+
+        /* 8. 窄視窗 */
+        @media (max-width: 600px) {
+            body { padding: 16px 12px; font-size: 16px; }
+            header, nav, section, aside { padding: 20px 16px; }
+            h1 { font-size: 1.65rem; }
+            h2 { font-size: 1.2rem; }
+            th, td { padding: 8px; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 第六次作業：一頁式東協廣場報導。方法一：行內 style（本頁三處）；方法二：head 的 style 元素。 -->
+
+    <header id="top">
+        <h1>東協廣場：台中的小東南亞</h1>
+        <p><small>城市走讀 · 文化地標 · 商圈漫遊</small></p>
+        <p><strong>從第一廣場到東協廣場，閱讀一座商場的城市記憶。</strong></p>
+        <!-- 方法一（1/3） -->
+        <p>本期焦點：<mark style="background-color: #a9f69d; color: #231b04; padding: 2px 6px;">東南亞文化與中區再生</mark>從歷史更名延伸到位置地圖。</p>
+        <p>作者：D1446021｜報導整理日期：<time datetime="2026-11-05">2026 年 11 月 5 日</time></p>
+        <!-- 方法一（2/3） -->
+        <p><small style="font-style: italic;">本文為資料整理型教學報導，非現場採訪紀錄。</small></p>
+    </header>
+
+    <nav aria-label="報導目錄">
+        <h2>報導目錄</h2>
+        <ul>
+            <li><a href="#intro">廣場簡介</a></li>
+            <li><a href="#highlights">特色與逛街順序</a></li>
+            <li><a href="#table">歷史時間表</a></li>
+            <li><a href="#photo">廣場照片</a></li>
+            <li><a href="#food">東南亞美食與商店</a></li>
+            <li><a href="#map">位置地圖</a></li>
+            <li><a href="#tips">參訪小提醒</a></li>
+            <li><a href="#sources">資料來源</a></li>
+        </ul>
+    </nav>
+
+    <hr>
+
+    <main id="main-content">
+        <article aria-label="東協廣場專題報導">
+
+            <section id="intro">
+                <h2>一、廣場簡介</h2>
+                <p>
+                    東協廣場位於台中市中區，緊鄰台中火車站一帶，前身是台中人熟悉的「第一廣場」（簡稱「一廣」）。
+                    它最早可追溯到 1908 年設立的第一市場，2016 年更名為「東協廣場」後，成為展現東南亞文化的城市地標。
+                </p>
+                <p>
+                    這裡聚集了印尼、越南、泰國、菲律賓等國的餐廳、雜貨店與服飾店，假日常有大批移工與新住民前來聚會，
+                    被不少人稱為「台中的小東南亞」。
+                </p>
+                <p>
+                    本篇以景點整理與建議逛街順序，帶你認識這座兼具生活感與異國風情的商場。
+                </p>
+                <p>地址：台中市中區綠川西街 135 號（依媒體報導整理，請以地圖確認）<br>閱讀重點：歷史更名、東南亞商圈、水岸散步。</p>
+            </section>
+
+            <hr>
+            <section id="highlights">
+                <h2>二、特色與逛街順序</h2>
+                <h3>值得留意的三個特色</h3>
+                <ul>
+                    <li><strong>歷史轉變：</strong>從公有市場、第一廣場到東協廣場，反映中區的城市變化。</li>
+                    <li><strong>多元文化：</strong>多國語言的招牌、食物與商品，形成獨特的生活場景。</li>
+                    <li><strong>水岸延伸：</strong>商圈沿綠川、柳川向外延伸，適合邊逛邊散步。</li>
+                </ul>
+
+                <h3>建議逛街順序</h3>
+                <!-- 方法一（3/3） -->
+                <p style="border-left: 4px solid #b37d38; padding-left: 14px;">以下是本報導規劃的建議，並非官方指定路線。</p>
+                <ol>
+                    <li>先在東協廣場內逛一圈，熟悉各樓層的店家與標示。</li>
+                    <li>走到二樓的購物美食區，觀察各國食品與雜貨。</li>
+                    <li>前往周邊街區，找找看東南亞小吃與商店。</li>
+                    <li>沿綠川水岸輕鬆散步，最後整理今天的觀察。</li>
+                </ol>
+            </section>
+
+            <hr>
+            <section id="table">
+                <h2>三、歷史時間表</h2>
+                <p><small>年代整理自新聞與觀光資料，不同來源對改建年份說法略有差異，引用前請再核對。</small></p>
+                <table>
+                    <caption>東協廣場的主要轉變</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">時間</th>
+                            <th scope="col">事件</th>
+                            <th scope="col">觀察重點</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1908 年</th>
+                            <td>設立台中市公有第一市場</td>
+                            <td>這塊地的商業起點</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1980–90 年代</th>
+                            <td>改建整建為「第一廣場」</td>
+                            <td>曾是中區的地標</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1992 年</th>
+                            <td>台灣開放外籍移工</td>
+                            <td>台中火車站周邊成為假日聚會地點</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2010 年</th>
+                            <td>二樓設為東南亞購物美食廣場</td>
+                            <td>東南亞店家逐漸增加</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2016 年 7 月 3 日</th>
+                            <td>正式更名為「東協廣場」</td>
+                            <td>市府推動中區再生</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <hr>
+            <section id="photo">
+                <h2>四、廣場照片</h2>
+                <figure>
+                    
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SSAotNf4Mic9m3V31_UbRKF4xqWop2L8CallkvVHRVVIYuqvS34wDoEh7XMEUO4fZ4J0q_1Cq1kjTjRt7QHK1DZ-pVsF8ppiXL33a3n-Jcov1JB26xt6-X0bnlVsYnq2kcY38r2Hx_nv8Y=s680-w680-h510-rw" alt="東協廣場封面示意圖" width="480">
+                    <figcaption></figcaption>
+                </figure>
+            </section>
+
+            <hr>
+            <section id="food">
+                <h2>五、東南亞美食與商店</h2>
+                <p>建築內外有餐廳、小吃、雜貨與服飾店。以下為常見類型整理，實際店家請以現場為準。</p>
+                <table>
+                    <caption>東南亞四國的逛街關鍵字</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">國家</th>
+                            <th scope="col">可以找找看</th>
+                            <th scope="col">觀察重點</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">印尼</th>
+                            <td>印尼小吃、香料與調味料</td>
+                            <td>清真標示與用餐習慣</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">越南</th>
+                            <td>河粉、咖啡、泡麵與零食</td>
+                            <td>越文招牌與在地口味</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">泰國</th>
+                            <td>泰式小吃、零食、飲品</td>
+                            <td>酸辣甜的調味層次</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">菲律賓</th>
+                            <td>菲式小吃與食品雜貨</td>
+                            <td>與台灣口味的差異</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <hr>
+            <section id="map">
+                <h2>六、位置地圖：找到東協廣場</h2>
+                <p>東協廣場位於台中市中區綠川西街一帶，鄰近台中火車站，搭火車或公車都方便。</p>
+                <!-- Google 地圖以文字搜尋定位，output=embed 回傳嵌入版；網址的 & 在 HTML 中寫成 &amp;。 -->
+                <iframe
+                    class="map-frame"
+                    src="https://www.google.com/maps?q=%E6%9D%B1%E5%8D%94%E5%BB%A3%E5%A0%B4+%E5%8F%B0%E4%B8%AD%E5%B8%82%E4%B8%AD%E5%8D%80%E7%B6%A0%E5%B7%9D%E8%A5%BF%E8%A1%97&amp;output=embed"
+                    width="480"
+                    height="360"
+                    title="東協廣場位置 Google 地圖"
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+                <p><a href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%B1%E5%8D%94%E5%BB%A3%E5%A0%B4+%E5%8F%B0%E4%B8%AD" target="_blank" rel="noopener noreferrer">在 Google 地圖開啟東協廣場（另開分頁）</a></p>
+                <p><small>位置查詢由 Google 地圖提供；抵達後請依現場指標確認入口。</small></p>
+            </section>
+
+            <hr>
+            <aside id="tips" aria-labelledby="tips-title">
+                <h2 id="tips-title">參訪小提醒</h2>
+                <details open>
+                    <summary>出發前，記得這三件事</summary>
+                    <ul>
+                        <li>拍照前先徵詢店家或人物同意，尊重隱私。</li>
+                        <li>週末與發薪日後人潮多，請留意隨身物品。</li>
+                        <li>把這裡當作別人的生活空間，保持禮貌與整潔。</li>
+                    </ul>
+                </details>
+            </aside>
+
+            <hr>
+            <section id="sources">
+                <h2>七、資料來源</h2>
+                <p>本報導依下列資料整理，逛街順序與觀察建議由作者規劃。</p>
+                <ul>
+                    <li><a href="https://www.cw.com.tw/article/5077487" target="_blank" rel="noopener noreferrer">天下雜誌：台中的東協狂想</a></li>
+                    <li><a href="https://www.thenewslens.com/article/117671" target="_blank" rel="noopener noreferrer">關鍵評論網：東協廣場微旅行</a></li>
+                    <li><a href="https://www.businesstoday.com.tw/article/category/80407/post/201810250007/" target="_blank" rel="noopener noreferrer">今周刊想想論壇：在台灣的第二個家</a></li>
+                    <li><a href="https://www.twreporter.org/a/taichung-whose-square" target="_blank" rel="noopener noreferrer">報導者：東協廣場</a></li>
+                </ul>
+                <p><small>資料整理日期：2026 年 11 月 5 日。</small></p>
+            </section>
+        </article>
+    </main>
+
+    <hr>
+    <footer>
+        <p><strong>第六次 HTML 與 CSS 作業｜東協廣場報導</strong></p>
+        <p><small>作者：D1582316 · 更新日期：2026 年 11 月 5 日</small></p>
+        <p><small>文字依來源整理；照片權利屬原作者。本文為課堂示範。</small></p>
+        <p><a href="#top">回到頁首</a></p>
+    </footer>
+</body>
+</html>
